@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÜBİTAK Eğitim Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>TÜBİTAK Eğitim Oyunu</h1>
+        <p>Bilgini test et, başarıya ulaş!</p>
+
+        <h2>Sınıfını Seç</h2>
+
+        <div class="buttons">
+            <button onclick="sinifSec(5)">5. Sınıf</button>
+            <button onclick="sinifSec(6)">6. Sınıf</button>
+        </div>
+
+        <h2>Dersini Seç</h2>
+
+        <div class="buttons">
+            <button onclick="dersSec('Fen Bilimleri')">Fen Bilimleri</button>
+            <button onclick="dersSec('Matematik')">Matematik</button>
+            <button onclick="dersSec('İngilizce')">İngilizce</button>
+        </div>
+
+        <p id="bilgi">Sınıfını ve dersini seç.</p>
+
+        <button id="baslaBtn" onclick="oyunuBaslat()">Oyuna Başla</button>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

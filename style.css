@@ -1,0 +1,145 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    color: #263445;
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    margin: 70px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1 {
+    color: #2563eb;
+    font-size: 30px;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+p {
+    color: #64748b;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    padding: 13px 20px;
+    border: 1px solid #d1dbe8;
+    border-radius: 9px;
+    background: white;
+    color: #263445;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover:not(:disabled) {
+    background: #2563eb;
+    color: white;
+}
+
+#basla {
+    margin-top: 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+#basla:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* OYUN EKRANI */
+
+.oyun-bilgileri {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.ders-baslik {
+  padding: 15px;
+  border-radius: 12px;
+  margin: 20px 0;
+  font-size: 19px;
+}
+
+.ders-baslik.fen {
+  background: #d9f5df;
+  color: #167333;
+}
+
+.ders-baslik.mat {
+  background: #dceaff;
+  color: #1455a5;
+}
+
+.ders-baslik.ing {
+  background: #fff0d5;
+  color: #a65b00;
+}
+
+.secenek {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background: white;
+  color: #222;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.secenek:hover:not(:disabled) {
+  background: #eaf1ff;
+}
+
+.secenek:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.secenek.dogru {
+  background: #d5f5dc;
+  border-color: #249b48;
+}
+
+.secenek.yanlis {
+  background: #ffdddd;
+  border-color: #d33;
+}
+
+#sonuc {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 20px 0;
+}
