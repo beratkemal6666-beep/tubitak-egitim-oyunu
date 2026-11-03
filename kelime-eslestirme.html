@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İngilizce Kelime Eşleştirme</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;color:white;
+ background:linear-gradient(135deg,#101b40,#263d78);
+ min-height:100vh;text-align:center;padding:25px;
+}
+h1{font-size:clamp(25px,4vw,40px)}
+p{color:#cbd8ff}
+.container{max-width:850px;margin:auto}
+button{
+ border:0;border-radius:14px;padding:18px;
+ font-size:19px;font-weight:bold;cursor:pointer;
+}
+.classes{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:40px}
+.classBtn{background:#4d8cff;color:white;min-width:180px}
+.classBtn:hover,.check:hover{filter:brightness(1.15)}
+.game{display:none}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:25px 0}
+.word{
+ width:100%;background:#ffffff;color:#17264d;
+ margin:8px 0;min-height:65px;
+ border:4px solid transparent;
+}
+.word.selected{border-color:#ffd34e;background:#fff4c2}
+.word.matched{background:#b7f4d0;color:#145b37;opacity:.8}
+.check{background:#35d6a0;color:#102d36;margin:8px}
+.back{background:#52658f;color:white;margin:8px}
+#message{font-size:20px;font-weight:bold;min-height:30px}
+#score{font-size:22px;color:#ffe17a}
+@media(max-width:550px){
+ body{padding:12px}
+ .columns{gap:8px}
+ .word{font-size:15px;padding:12px 5px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🇬🇧 İngilizce Kelime Eşleştirme</h1>
+<p>İngilizce kelimeleri Türkçe anlamlarıyla eşleştir!</p>
+
+<div id="menu">
+ <h2>Sınıfını seç</h2>
+ <div class="classes">
+  <button class="classBtn" onclick="startGame(5)">5. SINIF</button>
+  <button class="classBtn" onclick="startGame(6)">6. SINIF</button>
+ </div>
+</div>
+
+<div class="game" id="game">
+ <h2 id="grade"></h2>
+ <div id="score">⭐ Puan: 0</div>
+ <p>Önce soldan, sonra sağdan eşleştirmek istediğin kelimeye dokun.</p>
+ <div class="columns">
+  <div id="english"></div>
+  <div id="turkish"></div>
+ </div>
+ <div id="message"></div>
+ <button class="check" onclick="newRound()">Yeni tur ↻</button>
+ <button class="back" onclick="goMenu()">Sınıf seçimine dön</button>
+</div>
+</div>
+
+<script>
+const words={
+5:[
+["Apple","Elma"],["Book","Kitap"],["School","Okul"],
+["Pencil","Kalem"],["Teacher","Öğretmen"],
+["Window","Pencere"],["Door","Kapı"],
+["Family","Aile"],["Mother","Anne"],
+["Father","Baba"],["Friend","Arkadaş"],
+["House","Ev"],["Cat","Kedi"],["Dog","Köpek"]
+],
+6:[
+["Library","Kütüphane"],["Bedroom","Yatak odası"],
+["Balcony","Balkon"],["Kitchen","Mutfak"],
+["Museum","Müze"],["Crowded","Kalabalık"],
+["Quiet","Sessiz"],["Coast","Sahil"],
+["Elevator","Asansör"],["Fridge","Buzdolabı"],
+["Armchair","Koltuk"],["Bookcase","Kitaplık"],
+["Castle","Kale"],["Tower","Kule"]
+]
+};
+
+let grade=5,score=0,selectedEnglish=null,
+selectedTurkish=null,matched=[],round=[];
+
+function shuffle(arr){
+ return [...arr].sort(()=>Math.random()-.5);
+}
+
+function startGame(g){
+ grade=g;score=0;
+ document.getElementById("menu").style.display="none";
+ document.getElementById("game").style.display="block";
+ document.getElementById("grade").textContent=g+". SINIF";
+ newRound();
+}
+
+function newRound(){
+ round=shuffle(words[grade]).slice(0,5);
+ matched=[];
+ selectedEnglish=null;
+ selectedTurkish=null;
+ document.getElementById("message").textContent="";
+ document.getElementById("score").textContent="⭐ Puan: "+score;
+ draw();
+}
+
+function draw(){
+ const en=document.getElementById("english");
+ const tr=document.getElementById("turkish");
+ en.innerHTML="";
+ tr.innerHTML="";
+ round.forEach((w,i)=>{
+  const b=document.createElement("button");
+  b.className="word";
+  b.textContent=w[0];
+  if(matched.includes(i))b.classList.add("matched");
+  if(selectedEnglish===i)b.classList.add("selected");
+  b.disabled=matched.includes(i);
+  b.onclick=()=>{selectedEnglish=i;draw();checkPair()};
+  en.appendChild(b);
+ });
+ shuffle(round.map((w,i)=>({word:w[1],index:i}))).forEach(item=>{
+  const b=document.createElement("button");
+  b.className="word";
+  b.textContent=item.word;
+  if(matched.includes(item.index))b.classList.add("matched");
+  if(selectedTurkish===item.index)b.classList.add("selected");
+  b.disabled=matched.includes(item.index);
+  b.onclick=()=>{selectedTurkish=item.index;draw();checkPair()};
+  tr.appendChild(b);
+ });
+}
+
+function checkPair(){
+ if(selectedEnglish===null||selectedTurkish===null)return;
+ if(selectedEnglish===selectedTurkish){
+  matched.push(selectedEnglish);
+  score+=10;
+  document.getElementById("message").textContent="✓ Doğru eşleştirme! +10 puan";
+  selectedEnglish=null;
+  selectedTurkish=null;
+  draw();
+  document.getElementById("score").textContent="⭐ Puan: "+score;
+  if(matched.length===5){
+   document.getElementById("message").textContent=
+    "🏆 Harika! 5 kelimenin hepsini eşleştirdin!";
+  }
+ }else{
+  document.getElementById("message").textContent=
+   "Tekrar dene! Bu kelimeler eşleşmiyor.";
+ }
+}
+
+function goMenu(){
+ document.getElementById("game").style.display="none";
+ document.getElementById("menu").style.display="block";
+}
+</script>
+</body>
+</html>
