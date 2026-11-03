@@ -1,4 +1,3 @@
-
 // TÜBİTAK EĞİTİM OYUNU
 
 let secilenSinif = 0;
@@ -376,4 +375,5 @@ function oyunuBitir() {
     <button onclick="location.reload()">Tekrar Oyna</button>
   `;
 }
+
 
