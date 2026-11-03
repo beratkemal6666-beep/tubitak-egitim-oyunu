@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -143,3 +142,110 @@ button:hover:not(:disabled) {
   font-weight: bold;
   margin: 20px 0;
 }
+
+/* MODERN TÜBİTAK OYUN TASARIMI */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%, #164e9b 0%, transparent 35%),
+        radial-gradient(circle at 85% 80%, #572b91 0%, transparent 35%),
+        linear-gradient(135deg, #07152e, #102d59, #080d24);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Arka plan ışıkları */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 20% 70%, #16baff22 0%, transparent 25%),
+        radial-gradient(circle at 80% 15%, #a855f722 0%, transparent 25%);
+    animation: isik 7s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes isik {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* Ana oyun kutusu */
+.container {
+    max-width: 850px;
+    margin: 45px auto;
+    padding: 35px;
+    background: rgba(15, 31, 65, 0.88);
+    border: 1px solid #60a5fa66;
+    border-radius: 25px;
+    box-shadow: 0 0 40px #168bff33;
+    backdrop-filter: blur(12px);
+}
+
+/* Başlık */
+h1 {
+    color: #60c5ff;
+    text-align: center;
+    text-shadow: 0 0 18px #168bff;
+}
+
+/* Butonlar */
+button {
+    border: 1px solid #60a5fa;
+    border-radius: 13px;
+    padding: 14px 23px;
+    background: linear-gradient(135deg, #1769c2, #4939a9);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+    margin: 6px;
+}
+
+button:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 0 20px #38bdf8;
+    background: linear-gradient(135deg, #168bff, #7045d8);
+}
+
+/* Soru kutusu */
+#soru {
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Cevap seçenekleri */
+.secenek {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 17px;
+    background: #172f59;
+    border: 1px solid #448bd4;
+    border-radius: 14px;
+    color: white;
+    font-size: 17px;
+}
+
+.secenek:hover {
+    background: #24569a;
+    box-shadow: 0 0 15px #38bdf866;
+}
+
+.secenek.dogru {
+    background: #087b50;
+}
+
+.secenek.yanlis {
+    background: #a5283c;
+}
+
